@@ -89,6 +89,12 @@ class Flight extends Component {
     fetchFlights();
   }
 
+  createFlight(f) {
+    axios.post(SERVER_URL, { flight_num: f, date: f, origin: f, destination: f, airplane_id, f }).then(results => {
+      this.setState({flights: [results.data, ...this.state.flights] })
+    });
+  }
+
 
 
 
@@ -100,7 +106,7 @@ class Flight extends Component {
         <p><Link to="/airplane">Airplane</Link></p>
         <p><Link to="/flight">Flight</Link></p>
         <p><Link to="/search">Search</Link></p>
-        <FlightsForm />
+        <FlightsForm onSubmit={ this.createFlight } />
         <Results flights={ this.state.flights } />
       </div>
     )
