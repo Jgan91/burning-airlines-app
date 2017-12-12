@@ -90,7 +90,7 @@ class Flight extends Component {
   }
 
   createFlight(f) {
-    axios.post(SERVER_URL, { flight_num: f, date: f, origin: f, destination: f, airplane_id, f }).then(results => {
+    axios.post(SERVER_URL, { flight_num: f, date: f, origin: f, destination: f, airplane_id: f }).then(results => {
       this.setState({flights: [results.data, ...this.state.flights] })
     });
   }
