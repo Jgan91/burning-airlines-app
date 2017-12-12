@@ -3,9 +3,6 @@ import React from 'react';
 function Results(props) {
   return (
     <div>
-<<<<<<< HEAD
-      { props.flights.map( f => <p key={ f.id }>{ f.origin  }</p> ) }
-=======
       <h3>Flights</h3>
       <div className="results-grid headings">
         <span className="results-date">Date</span>
@@ -21,7 +18,6 @@ function Results(props) {
           <span className="results-plane"></span>
         </div>
       ) }
->>>>>>> 86cefd6022885d5c2c2f024fdf3ba46e0dfcc559
     </div>
   );
 }
