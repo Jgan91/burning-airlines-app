@@ -1,5 +1,4 @@
 import React, { PureComponent as Component } from 'react';
-import BurningAirlines from './BurningAirlines';
 
 class Flight extends Component {
   render() {
