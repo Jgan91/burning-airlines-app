@@ -7,5 +7,6 @@ class Airplane extends Component {
         <h1> Airplane taking off soon </h1>
       </div>
     )
+  }
 }
 export default Airplane;
