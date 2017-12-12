@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Results from './Results';
 
 import axios from 'axios';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const SERVER_URL = 'http://localhost:5000/flights.json';
 
@@ -15,8 +17,8 @@ const SERVER_URL = 'http://localhost:5000/flights.json';
 // }
 
 class FlightsForm extends Component {
-  constructor() {
-    super();
+  constructor( props ) {
+    super( props );
     this.state = { flight_num: '', date: '', origin: '', destination: '', airplane_id: '' };
     this._handleChangeFlightNum = this._handleChangeFlightNum.bind(this);
 
@@ -48,7 +50,7 @@ class FlightsForm extends Component {
   }
 
   _handleChangeAirplane(e) {
-    this.setState( { airplane: e.target.value } );
+    this.setState( { airplane_id: e.target.value } );
   }
 
   _handleSubmit(e) {
@@ -69,7 +71,12 @@ class FlightsForm extends Component {
 
         <input type="text" onChange={this._handleChangeDestination} value={this.state.destination}  placeholder="destination" />
 
-        <input type="select" onChange={this._handleChangeAirplane} value={this.state.airplane_id} placeholder="airplane" />
+        <select onChange={this._handleChangeAirplane}>
+          <option value={this.props.flights[0].id}>
+            plane
+          </option>
+
+        </select>
 
         <input type="submit" value="create flight" />
 
@@ -95,10 +102,6 @@ class Flight extends Component {
     });
   }
 
-
-
-
-
   render() {
     return (
       <div>
@@ -106,7 +109,7 @@ class Flight extends Component {
         <p><Link to="/airplane">Airplane</Link></p>
         <p><Link to="/flight">Flight</Link></p>
         <p><Link to="/search">Search</Link></p>
-        <FlightsForm onSubmit={ this.createFlight } />
+        <FlightsForm flights={ this.state.flights } onSubmit={ this.createFlight } />
         <Results flights={ this.state.flights } />
       </div>
     )

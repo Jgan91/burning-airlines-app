@@ -15,7 +15,7 @@ function Results(props) {
           <span className="results-date">{ f.date }</span>
           <span className="results-flight">{ f.flight_num }</span>
           <span className="results-from">{ f.origin } > { f.destination }</span>
-          <span className="results-plane"></span>
+          <span className="results-plane">{ f.airplane_id }</span>
         </div>
       ) }
     </div>
