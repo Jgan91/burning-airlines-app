@@ -1,5 +1,5 @@
 import React, { PureComponent as Component } from 'react';
-import BurningAirlines from './BurningAirlines';
+import { Link } from 'react-router-dom';
 
 class Flight extends Component {
   render() {
