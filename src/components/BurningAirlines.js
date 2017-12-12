@@ -7,6 +7,7 @@ class BurningAirlines extends Component {
   render() {
     return (
       <div>
+        <h1>Burning Airlines</h1>
         <Airplane />
         <Flight />
         <Search />
