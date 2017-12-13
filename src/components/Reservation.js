@@ -10,7 +10,9 @@ const SERVER_URL = 'http://localhost:5000/flights/'
 class Reservation extends Component {
   constructor( props ) {
     super( props );
-    this.state = { flight: '' };
+    this.state = { flight: '', selectedSeat: { row: '', column: '' } };
+
+    this.fetchSelectedSeat = this.fetchSelectedSeat.bind( this );
 
     const fetchFlights = () => {
       axios.get( SERVER_URL + this.props.match.params.flightId +".json" ).then( results => this.setState( { flight: results.data } ) );
@@ -18,14 +20,17 @@ class Reservation extends Component {
     fetchFlights();
   }
 
+  fetchSelectedSeat( row, column ) {
+    this.setState( { selectedSeat: { row: row, column: column } } );
+  }
+
   render() {
     return (
     <div>
       <h1> Reservation </h1>
       < FlightInfo flightId={ this.props.match.params.flightId } />
-      < SeatingPlan flight={ this.state.flight } />
-      < SelectedSeat />
-      <h2>{ this.props.match.params.flightId }</h2>
+      < SeatingPlan flight={ this.state.flight } onClick={ this.fetchSelectedSeat } />
+      < SelectedSeat seat={ this.state.selectedSeat }/>
     </div>
     )
   }
@@ -63,6 +68,12 @@ class SeatingPlan extends Component {
     super( props );
     this.state = { airplane: this.props.flight.airplane };
 
+    this._handleClick = this._handleClick.bind( this );
+  }
+
+  _handleClick(e) {
+    console.log( e.target, e.target.attributes[ "data-column" ].value , e.target.attributes[ "data-row" ].value );
+    this.props.onClick( e.target.attributes[ "data-row" ].value, e.target.attributes[ "data-column" ].value );
   }
 
   render() {
@@ -73,11 +84,12 @@ class SeatingPlan extends Component {
         <p>Loading...</p>
       )
     }
+
     return (
       <div>
-      <h1> Seating plan coming soon </h1>
+      <h2>Seating plan</h2>
       <div className="plan">
-        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows) ).map( ( row, rowIndex ) => <div className="seat">{ String.fromCharCode( columnIndex + 65 ) }{ rowIndex + 1 }</div> ) }</div> ) }
+        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <div className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</div> ) }</div> ) }
       </div>
       </div>
     )
@@ -85,10 +97,15 @@ class SeatingPlan extends Component {
 }
 
 class SelectedSeat extends Component {
+  constructor( props ) {
+    super( props );
+  }
   render() {
     return (
       <div>
-      <h3> Choose your seat wisely or you might die </h3>
+        <h3> Choose your seat wisely or you might die </h3>
+        { this.props.seat.row }{ this.props.seat.column }
+        <input type="submit" value="Select Seat" />
       </div>
     )
   }
