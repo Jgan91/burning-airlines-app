@@ -95,19 +95,24 @@ class SeatingPlan extends Component {
   constructor( props ) {
     super( props );
 
-    const makeGrid = ( columns, rows ) => {
-      let grid = "<div>";
-      for ( let i = 0; i < columns.length; i++ ) {
-        grid += `<div className ="seat"></div>`;
-      }
-      grid += "</div>";
-      console.log( 'div', <div><div className ="seat"></div> <div className ="seat"></div></div> );
-      console.log( grid );
-      console.log( _.range( columns ).forEach( () => <div className ="seat"></div>) );
-
-    }
-
-    makeGrid( 4, 6 );
+    // const makeGrid = ( columns, rows ) => {
+    //   let grid = "<div>";
+    //   for ( let i = 0; i < columns.length; i++ ) {
+    //     let row = "<div>";
+    //     for ( let j = 0; j < rows.length; j++ ) {
+    //       row += `<div className="seat"></div>`;
+    //     }
+    //     row += "</div>";
+    //     grid += row;
+    //   }
+    //   grid += "</div>";
+    //   console.log( 'div', <div><div className ="seat"></div> <div className ="seat"></div></div> );
+    //   console.log( grid );
+    //   console.log( _.range( columns ).forEach( () => <div className ="seat"></div>) );
+    //
+    // }
+    //
+    // makeGrid( 4, 6 );
 
   }
 
@@ -118,11 +123,10 @@ class SeatingPlan extends Component {
         <h3> Seating Plan </h3>
         { this.props.airplanes.map(airplane=> (
           <div className="airplane" key={airplane.id}>
-            <p> {airplane.name} </p>
-            <div className ="plan">
-            { _.range( parseInt( airplane.columns ) ).map( () => <div className ="seat"></div> ) }
+            <span> {airplane.name} </span><span> Rows: {airplane.rows} </span><span> Columns: {airplane.columns} </span>
+            <div className="plan">
+              { _( airplane.columns ).times( () => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( () => <div className ="seat"></div> ) }</div> ) }
             </div>
-
           </div>
         ))}
       </div>
