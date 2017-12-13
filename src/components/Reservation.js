@@ -10,7 +10,9 @@ const SERVER_URL = 'http://localhost:5000/flights/'
 class Reservation extends Component {
   constructor( props ) {
     super( props );
-    this.state = { flight: '' };
+    this.state = { flight: '', selectedSeat: { row: '', column: '' } };
+
+    this.fetchSelectedSeat = this.fetchSelectedSeat.bind( this );
 
     const fetchFlights = () => {
       axios.get( SERVER_URL + this.props.match.params.flightId +".json" ).then( results => this.setState( { flight: results.data } ) );
@@ -30,16 +32,18 @@ class Reservation extends Component {
     )
   }
 
+  fetchSelectedSeat( row, column ) {
+    this.setState( { selectedSeat: { row: row, column: column } } );
+  }
+
   render() {
     return (
     <div>
       <h1> Reservation </h1>
       < AddName onSubmit={ this.createUser } />
       < FlightInfo flightId={ this.props.match.params.flightId } />
-      < SeatingPlan flight={ this.state.flight } />
-      < SelectedSeat />
-
-      <h2>{ this.props.match.params.flightId }</h2>
+      < SeatingPlan flight={ this.state.flight } onClick={ this.fetchSelectedSeat } />
+      < SelectedSeat seat={ this.state.selectedSeat } flightId={ this.props.match.params.flightId } />
     </div>
     )
   }
@@ -104,7 +108,7 @@ class SeatingPlan extends Component {
       <div>
       <h2>Seating plan</h2>
       <div className="plan">
-        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <div className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</div> ) }</div> ) }
+        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <button className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</button> ) }</div> ) }
       </div>
       </div>
     )
@@ -112,41 +116,28 @@ class SeatingPlan extends Component {
 }
 
 class SelectedSeat extends Component {
-  render() {
-    return (
-      <div>
-      <h3> Choose your seat wisely or you might die </h3></div>
-    );
-  }
-}
+  constructor( props ) {
+    super( props );
 
-class AddName extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: ''};
-
-  this._handleNameChange = this._handleNameChange.bind(this);
+    this.makeReservation = this.makeReservation.bind( this );
   }
 
-  _handleNameChange(e) {
-    this.setState({ name: e.target.value });
-  }
-
-  _handleSubmit(e) {
+  makeReservation(e) {
     e.preventDefault();
-    // this.props.onSubmit(this.state.value);
-    console.log('submitted');
-    // this.setState( { name: ''});
+    console.log( 'clicked' );
+    const userId = 4;
+    axios.post( 'http://localhost:5000/reservations.json', { user_id: userId, flight_id: this.props.flightId, row: this.props.seat.row, column: this.props.seat.column } )
   }
 
   render() {
     return (
       <div>
-          <form onSubmit={ this._handleSubmit}>
-            <label> First Name: </label>
-            <input type="text" value={ this.state.name } onChange={this._handleNameChange} placeholder="Ben" />
-            <input type="submit" value="Submit"/>
-          </form>
+        <h3> Choose your seat wisely or you might die </h3>
+        { this.props.seat.row }{ this.props.seat.column }
+        <form onSubmit={ this.makeReservation }>
+          <input type="text" placeholder="Name" />
+          <input type="submit" value="Select Seat" />
+        </form>
       </div>
     )
   }
