@@ -1,6 +1,7 @@
 import React, { PureComponent as Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import _ from 'underscore';
 
 const SERVER_URL = 'http://localhost:5000/airplanes.json'
 
@@ -18,11 +19,11 @@ class Airplane extends Component {
     fetchAirplanes();
   }
 
-  createAirplane(a) {
+  createAirplane(name, rows, columns) {
     console.log(this.state);
-    axios.post(SERVER_URL, {name: a}).then( results => this.setState( { airplanes: [results.data, ...this.state.airplanes] })
-  )
-}
+    axios.post(SERVER_URL, {name: name, rows: rows, columns:  columns}).then( results => this.setState( { airplanes:   [results.data, ...this.state.airplanes] })
+    )
+  }
 
   render() {
     return (
@@ -54,12 +55,12 @@ class CreateAirplane extends Component {
       this.setState({ name: e.target.value });
     }
 
-    _handleRowChange(f) {
-      this.setState({ rows: f.target.value });
+    _handleRowChange(e) {
+      this.setState({ rows: e.target.value });
     }
 
-    _handleColumnChange(g) {
-      this.setState({ columns: g.target.value });
+    _handleColumnChange(e) {
+      this.setState({ columns: e.target.value });
     }
 
     _handleSubmit(e) {
@@ -93,15 +94,47 @@ class CreateAirplane extends Component {
 class SeatingPlan extends Component {
   constructor( props ) {
     super( props );
+
+    const makeGrid = ( columns, rows ) => {
+      let grid = "<div>";
+      for ( let i = 0; i < columns.length; i++ ) {
+        grid += `<div className ="seat"></div>`;
+      }
+      grid += "</div>";
+      console.log( 'div', <div><div className ="seat"></div> <div className ="seat"></div></div> );
+      console.log( grid );
+      console.log( _.range( columns ).forEach( () => <div className ="seat"></div>) );
+
+    }
+
+    makeGrid( 4, 6 );
+
   }
+
 
   render() {
     return (
       <div>
         <h3> Seating Plan </h3>
         { this.props.airplanes.map(airplane=> (
-          <div key={airplane.id}>
+          <div className="airplane" key={airplane.id}>
             <p> {airplane.name} </p>
+            <div className ="plan">
+            { _.range( parseInt( airplane.columns ) ).forEach( function() {
+              return <div className ="seat"></div>;
+            }) }
+            { <div className ="seat"></div> }
+            { <div className ="seat"></div> }
+
+              { _.range( parseInt( airplane.columns ) ).forEach( () => <div className ="seat">' '</div> ) }
+             {_(airplane.columns).each(function (column) {
+               _(airplane.rows).each(function (row) {
+                 <div className ="seat"></div>
+               })
+             })
+           }
+             </div>
+
           </div>
         ))}
       </div>
