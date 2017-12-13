@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import Results from './Results';
 
 import axios from 'axios';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 const SERVER_URL = 'http://localhost:5000/flights.json';
 
@@ -71,12 +69,10 @@ class FlightsForm extends Component {
 
         <input type="text" onChange={this._handleChangeDestination} value={this.state.destination}  placeholder="destination" />
 
-        <select onChange={this._handleChangeAirplane}>
-          <option value={this.props.flights[0].id}>
-            plane
-          </option>
-
-        </select>
+        <input type="number"
+        onChange={this._handleChangeAirplane}
+        value={this.state.airplane_id}
+        placeholder="airplane id" />
 
         <input type="submit" value="create flight" />
 
@@ -97,7 +93,7 @@ class Flight extends Component {
   }
 
   createFlight(f) {
-    axios.post(SERVER_URL, { flight_num: f, date: f, origin: f, destination: f, airplane_id: f }).then(results => {
+    axios.post(SERVER_URL, { flight_num: f.flight_num, date: f.date, origin: f.origin, destination: f.destination, airplane_id: f.airplane_id }).then(results => {
       this.setState({flights: [results.data, ...this.state.flights] })
     });
   }
