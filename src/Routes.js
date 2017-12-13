@@ -13,7 +13,7 @@ const Routes = (
     <div>
       <Route exact path="/" component={ BurningAirlines } />
       <Route exact path="/airplane" component={ Airplane } />
-      <Route exact path="/flight" component={ Flight } />
+      <Route path="/flight/:flightId" component={ Flight } />
       <Route exact path="/search" component={ Search } />
       <Route exact path="/reservation" component={ Reservation } />
     </div>
