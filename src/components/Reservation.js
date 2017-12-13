@@ -77,7 +77,7 @@ class SeatingPlan extends Component {
       <div>
       <h1> Seating plan coming soon </h1>
       <div className="plan">
-        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows) ).map( ( row, rowIndex ) => <div className="seat">{ columnIndex + 1 } - { rowIndex + 1 }</div> ) }</div> ) }
+        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows) ).map( ( row, rowIndex ) => <div className="seat">{ String.fromCharCode( columnIndex + 65 ) }{ rowIndex + 1 }</div> ) }</div> ) }
       </div>
       </div>
     )
