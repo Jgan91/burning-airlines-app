@@ -23,7 +23,7 @@ class Reservation extends Component {
     <div>
       <h1> Reservation </h1>
       < FlightInfo flightId={ this.props.match.params.flightId } />
-      < SeatingPlan flightId={ this.props.match.params.flightId } />
+      < SeatingPlan flight={ this.state.flight } />
       < SelectedSeat />
       <h2>{ this.props.match.params.flightId }</h2>
     </div>
@@ -59,22 +59,16 @@ class SeatingPlan extends Component {
     super( props );
     this.state = { airplane: {} };
 
-    const fetchAirplane = () => {
-      axios.get( SERVER_URL + props.flightId ).then( results => this.setState( { airplane: results.data.airplane } ) );
-    }
-    fetchAirplane();
   }
 
   render() {
-    const columns = this.state.airplane.columns;
-    const rows = this.state.airplane.rows;
+    const columns = this.props.flight.airplane;
+    console.log( columns );
 
     return (
       <div>
         <h1> Seating plan coming soon </h1>
         <div className="plan">
-          { this.state.airplane.name }
-          { this.state.airplane.columns }
 
         </div>
       </div>
