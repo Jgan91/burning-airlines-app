@@ -45,11 +45,15 @@ class FlightInfo extends Component {
 
   render() {
     return (
-      <h2>
-        { this.state.flight.date }
-        { this.state.flight.flight_num }
+
+      <h2 className="flightdeets">
+        Flight Date: { this.state.flight.date }
+        <br/>
+        Flight Number: { this.state.flight.flight_num }
+        <br/>
         { this.state.flight.origin } > { this.state.flight.destination }
       </h2>
+
     )
   }
 }
@@ -79,7 +83,9 @@ class SeatingPlan extends Component {
 class SelectedSeat extends Component {
   render() {
     return (
-      <h2> Chosen seat </h2>
+      <div>
+      <h3> Choose your seat wisely or you might die </h3>
+      </div>
     )
   }
 }

@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 50px;
   padding: 0;
   font-family: sans-serif;
 }
@@ -8,10 +8,14 @@ label {
   font-size: 13px;
 }
 
-
 .seat {
   display: inline-block;
   border: 1px solid black;
   width: 50px;
   height: 50px;
 }
+
+.flightdeets {
+  color: indianred;
+  letter-spacing: 6px;
+};

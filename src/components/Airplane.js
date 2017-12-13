@@ -28,7 +28,7 @@ class Airplane extends Component {
   render() {
     return (
       <div>
-        <h1> Airplane </h1>
+        <h1> Burning Fleet </h1>
         < CreateAirplane onSubmit= {this.createAirplane} />
         < SeatingPlan airplanes={ this.state.airplanes } />
       </div>
@@ -72,7 +72,7 @@ class CreateAirplane extends Component {
   render() {
     return (
       <div>
-        <h3> Add new plane </h3>
+        <h3> Add a New Plane </h3>
         <form onSubmit={ this._handleSubmit }>
           <label> Name: </label>
             <input type="text" value={ this.state.name } onChange={this._handleNameChange} placeholder="747" />

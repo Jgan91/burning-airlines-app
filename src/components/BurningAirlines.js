@@ -12,7 +12,7 @@ class BurningAirlines extends Component {
         <p><Link to="/airplane">Airplane</Link> </p>
         <p><Link to="/flight">Flight</Link> </p>
         <p><Link to="/search">Search</Link> </p>
-        <p><Link to="/reservation">Reservations</Link> </p>
+    
       </div>
     );
   }
