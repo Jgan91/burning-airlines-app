@@ -36,7 +36,7 @@ class Search extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2>Search coming soon</h2>
+        <h2>Search for your flight </h2>
         <FlightSearch onSubmit={ this.fetchFlights }/>
         <Results flights={ this.state.flights }/>
       </React.Fragment>
