@@ -94,28 +94,7 @@ class CreateAirplane extends Component {
 class SeatingPlan extends Component {
   constructor( props ) {
     super( props );
-
-    // const makeGrid = ( columns, rows ) => {
-    //   let grid = "<div>";
-    //   for ( let i = 0; i < columns.length; i++ ) {
-    //     let row = "<div>";
-    //     for ( let j = 0; j < rows.length; j++ ) {
-    //       row += `<div className="seat"></div>`;
-    //     }
-    //     row += "</div>";
-    //     grid += row;
-    //   }
-    //   grid += "</div>";
-    //   console.log( 'div', <div><div className ="seat"></div> <div className ="seat"></div></div> );
-    //   console.log( grid );
-    //   console.log( _.range( columns ).forEach( () => <div className ="seat"></div>) );
-    //
-    // }
-    //
-    // makeGrid( 4, 6 );
-
   }
-
 
   render() {
     return (
