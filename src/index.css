@@ -2,6 +2,7 @@ body {
   margin: 50px;
   padding: 0;
   font-family: sans-serif;
+  background-color: indianred;
 }
 
 label {
@@ -16,6 +17,6 @@ label {
 }
 
 .flightdeets {
-  color: indianred;
+  color: white;
   letter-spacing: 6px;
 };
