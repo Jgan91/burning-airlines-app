@@ -61,18 +61,15 @@ class FlightsForm extends Component {
     return (
       <form onSubmit={this._handleSubmit}>
 
-        <input type="text" onChange={this._handleChangeFlightNum} value={this.state.flight_num} placeholder="flight num" />
+        <input type="text" value={this.state.flight_num} onChange={this._handleChangeFlightNum} placeholder="flight num" />
 
-        <input type="text" onChange={this._handleChangeDate} value={this.state.date} placeholder="date" />
+        <input type="text" value={this.state.date} onChange={this._handleChangeDate}  placeholder="date" />
 
-        <input type="text" onChange={this._handleChangeOrigin} value={this.state.origin} placeholder="origin" />
+        <input type="text" value={this.state.origin} onChange={this._handleChangeOrigin}  placeholder="origin" />
 
-        <input type="text" onChange={this._handleChangeDestination} value={this.state.destination}  placeholder="destination" />
+        <input type="text" value={this.state.destination} onChange={this._handleChangeDestination}   placeholder="destination" />
 
-        <input type="number"
-        onChange={this._handleChangeAirplane}
-        value={this.state.airplane_id}
-        placeholder="airplane id" />
+        <input type="number" value={this.state.airplane_id} onChange={this._handleChangeAirplane} placeholder="airplane id" />
 
         <input type="submit" value="create flight" />
 
@@ -85,6 +82,7 @@ class Flight extends Component {
   constructor() {
     super();
     this.state = { flights: [] };
+    this.createFlight = this.createFlight.bind(this);
 
     const fetchFlights = () => {
       axios.get( SERVER_URL ).then( results => this.setState( { flights: results.data } ) );
@@ -92,9 +90,10 @@ class Flight extends Component {
     fetchFlights();
   }
 
-  createFlight(f) {
-    axios.post(SERVER_URL, { flight_num: f.flight_num, date: f.date, origin: f.origin, destination: f.destination, airplane_id: f.airplane_id }).then(results => {
-      this.setState({flights: [results.data, ...this.state.flights] })
+  createFlight(flight_num, date, origin, destination, airplane_id) {
+    axios.post(SERVER_URL, { flight_num: flight_num, date: date, origin: origin, destination: destination, airplane_id: airplane_id }).then(results =>
+      {
+      this.setState({ flights: [results.data, ...this.state.flights] })
     });
   }
 
@@ -105,7 +104,7 @@ class Flight extends Component {
         <p><Link to="/airplane">Airplane</Link></p>
         <p><Link to="/flight">Flight</Link></p>
         <p><Link to="/search">Search</Link></p>
-        <FlightsForm flights={ this.state.flights } onSubmit={ this.createFlight } />
+        <FlightsForm onSubmit={ this.createFlight } />
         <Results flights={ this.state.flights } />
       </div>
     )
