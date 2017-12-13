@@ -7,3 +7,13 @@ body {
 label {
   font-size: 13px;
 }
+
+.plan {
+  border: 1px solid black;
+}
+
+.seat {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
