@@ -120,20 +120,8 @@ class SeatingPlan extends Component {
           <div className="airplane" key={airplane.id}>
             <p> {airplane.name} </p>
             <div className ="plan">
-            { _.range( parseInt( airplane.columns ) ).forEach( function() {
-              return <div className ="seat"></div>;
-            }) }
-            { <div className ="seat"></div> }
-            { <div className ="seat"></div> }
-
-              { _.range( parseInt( airplane.columns ) ).forEach( () => <div className ="seat">' '</div> ) }
-             {_(airplane.columns).each(function (column) {
-               _(airplane.rows).each(function (row) {
-                 <div className ="seat"></div>
-               })
-             })
-           }
-             </div>
+            { _.range( parseInt( airplane.columns ) ).map( () => <div className ="seat"></div> ) }
+            </div>
 
           </div>
         ))}

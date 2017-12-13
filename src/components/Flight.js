@@ -1,6 +1,7 @@
 import React, { PureComponent as Component } from 'react';
 import { Link } from 'react-router-dom';
 import Results from './Results';
+import { HashRouter as Router, Route} from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -79,9 +80,11 @@ class FlightsForm extends Component {
 }
 
 class Flight extends Component {
-  constructor() {
-    super();
-    this.state = { flights: [] };
+  constructor( props ) {
+    super( props );
+    let match = props.match;
+
+    this.state = { flights: [], flightId: match.params.flightId };
     this.createFlight = this.createFlight.bind(this);
 
     const fetchFlights = () => {
