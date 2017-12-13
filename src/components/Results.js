@@ -15,7 +15,7 @@ function Results(props) {
       { props.flights.map( f =>
         <div className="results-grid" key={ f.id }>
           <span className="results-date">{ f.date }</span>
-          <span className="results-flight"><Link to="/flights/1">{ f.flight_num }</Link></span>
+          <span className="results-flight"><Link to={/flight/+f.id}>{ f.flight_num }</Link></span>
           <span className="results-from">{ f.origin } > { f.destination }</span>
           <span className="results-plane">{ f.airplane_id }</span>
         </div>
