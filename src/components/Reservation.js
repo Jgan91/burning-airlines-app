@@ -12,6 +12,7 @@ class Reservation extends Component {
       < FlightInfo />
       < SeatingPlan />
       < SelectedSeat />
+      <h2>{ this.props.match.params.flightId }</h2>
     </div>
     )
   }
