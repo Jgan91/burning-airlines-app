@@ -6,6 +6,7 @@ import BurningAirlines from './components/BurningAirlines';
 import Airplane from './components/Airplane';
 import Flight from './components/Flight';
 import Search from './components/Search';
+import Reservation from './components/Reservation';
 
 const Routes = (
   <Router>
@@ -14,6 +15,7 @@ const Routes = (
       <Route exact path="/airplane" component={ Airplane } />
       <Route exact path="/flight" component={ Flight } />
       <Route exact path="/search" component={ Search } />
+      <Route exact path="/reservation" component={ Reservation } />
     </div>
   </Router>
 )
