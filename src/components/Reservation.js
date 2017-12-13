@@ -57,20 +57,24 @@ class FlightInfo extends Component {
 class SeatingPlan extends Component {
   constructor( props ) {
     super( props );
-    this.state = { airplane: {} };
+    this.state = { airplane: this.props.flight.airplane };
 
   }
 
   render() {
-    const columns = this.props.flight.airplane;
-    console.log( columns );
-
+    const airplane = this.props.flight.airplane;
+    if ( airplane === undefined ) {
+      console.log( airplane );
+      return (
+        <p>Loading...</p>
+      )
+    }
     return (
       <div>
-        <h1> Seating plan coming soon </h1>
-        <div className="plan">
-
-        </div>
+      <h1> Seating plan coming soon </h1>
+      <div className="plan">
+        { _( airplane.columns ).times( () => <div className="row">{ _.range( parseInt( airplane.rows) ).map( () => <div className="seat"></div> ) }</div> ) }
+      </div>
       </div>
     )
   }
