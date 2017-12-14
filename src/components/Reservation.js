@@ -1,4 +1,5 @@
 import React, { PureComponent as Component } from 'react';
+
 import Flight from './Flight';
 import { Link } from 'react-router-dom';
 
@@ -108,6 +109,7 @@ class SelectedSeat extends Component {
     console.log( 'clicked' );
     const userId = 4;
     axios.post( 'http://localhost:5000/reservations.json', { user_id: userId, flight_id: this.props.flightId, row: this.props.seat.row, column: this.props.seat.column } )
+
   }
 
   render() {

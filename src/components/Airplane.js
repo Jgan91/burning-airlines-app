@@ -35,7 +35,6 @@ class Airplane extends Component {
         <h1> Burning Fleet </h1>
         < CreateAirplane onSubmit= {this.createAirplane} />
         < SeatingPlan airplanes={ this.state.airplanes } />
-        <Results airplanes={ this.state.airplanes } />
       </div>
     )
   }
