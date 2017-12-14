@@ -30,7 +30,7 @@ class Reservation extends Component {
       <h1> Reservation </h1>
       < FlightInfo flightId={ this.props.match.params.flightId } />
       < SeatingPlan flight={ this.state.flight } onClick={ this.fetchSelectedSeat } />
-      < SelectedSeat seat={ this.state.selectedSeat }/>
+      < SelectedSeat seat={ this.state.selectedSeat } flightId={ this.props.match.params.flightId } />
     </div>
     )
   }
@@ -89,7 +89,7 @@ class SeatingPlan extends Component {
       <div>
       <h2>Seating plan</h2>
       <div className="plan">
-        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <div className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</div> ) }</div> ) }
+        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <button className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</button> ) }</div> ) }
       </div>
       </div>
     )
@@ -99,13 +99,26 @@ class SeatingPlan extends Component {
 class SelectedSeat extends Component {
   constructor( props ) {
     super( props );
+
+    this.makeReservation = this.makeReservation.bind( this );
   }
+
+  makeReservation(e) {
+    e.preventDefault();
+    console.log( 'clicked' );
+    const userId = 4;
+    axios.post( 'http://localhost:5000/reservations.json', { user_id: userId, flight_id: this.props.flightId, row: this.props.seat.row, column: this.props.seat.column } )
+  }
+
   render() {
     return (
       <div>
         <h3> Choose your seat wisely or you might die </h3>
         { this.props.seat.row }{ this.props.seat.column }
-        <input type="submit" value="Select Seat" />
+        <form onSubmit={ this.makeReservation }>
+          <input type="text" placeholder="Name" />
+          <input type="submit" value="Select Seat" />
+        </form>
       </div>
     )
   }
