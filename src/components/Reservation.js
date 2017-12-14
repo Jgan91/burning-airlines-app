@@ -10,7 +10,7 @@ const SERVER_URL = 'http://localhost:5000/flights/'
 class Reservation extends Component {
   constructor( props ) {
     super( props );
-    this.state = { flight: '', selectedSeat: { row: '', column: '' } };
+    this.state = { flight: '', selectedSeat: { row: '', column: '' }, seats: [] };
 
     this.fetchSelectedSeat = this.fetchSelectedSeat.bind( this );
 
@@ -78,6 +78,10 @@ class SeatingPlan extends Component {
 
   render() {
     const airplane = this.props.flight.airplane;
+    const reservations = this.props.flight.reservations;
+    console.log( reservations );
+    console.log( _.isObject( _( reservations ).findWhere( { row: '4', column: 'A' } ) ) );
+
     if ( airplane === undefined ) {
       console.log( airplane );
       return (
@@ -89,7 +93,16 @@ class SeatingPlan extends Component {
       <div>
       <h2>Seating plan</h2>
       <div className="plan">
-        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) => <button className="seat" data-column={ String.fromCharCode( columnIndex + 65 ) } data-row={ rowIndex + 1 } onClick={ this._handleClick }>{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</button> ) }</div> ) }
+        { _.range( parseInt( airplane.columns ) ).map( ( column, columnIndex ) =>
+          <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex ) =>
+            <button className={ `seat ${ rowIndex + 1 }${ String.fromCharCode( columnIndex + 65 ) }` }
+              data-column={ String.fromCharCode( columnIndex + 65 ) }
+              data-row={ rowIndex + 1 }
+              onClick={ this._handleClick }
+            >
+              { `${ rowIndex + 1 }${ String.fromCharCode( columnIndex + 65 ) }` }
+            </button> ) }
+          </div> ) }
       </div>
       </div>
     )
