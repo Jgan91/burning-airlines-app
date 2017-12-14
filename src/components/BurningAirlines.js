@@ -12,7 +12,7 @@ class BurningAirlines extends Component {
         <p><Link to="/airplane">Airplane</Link> </p>
         <p><Link to="/flight">Flight</Link> </p>
         <p><Link to="/search">Search</Link> </p>
-    
+        <img src="https://media1.tenor.com/images/cc94eb6680dbcce1123c8edf7aba8102/tenor.gif?itemid=5342919" alt="elmo" />
       </div>
     );
   }
