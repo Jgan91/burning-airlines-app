@@ -129,7 +129,7 @@ class SelectedSeat extends Component {
   render() {
     return (
       <div>
-        <h3> Choose your seat wisely or you might die </h3>
+        <h3> Choose your seat wisely or you might die... </h3>
         { this.props.seat.row }{ this.props.seat.column }
         <form onSubmit={ this.makeReservation }>
           <input type="text" placeholder="Name" />
