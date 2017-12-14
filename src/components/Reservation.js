@@ -19,6 +19,18 @@ class Reservation extends Component {
       axios.get( SERVER_URL + this.props.match.params.flightId +".json" ).then( results => this.setState( { flight: results.data } ) );
     }
     fetchFlights();
+
+    const fetchUsers= () => {
+      axios.get( SERVER_URL ).then( results => this.setState( { users: results.data } ) );
+    }
+    fetchUsers();
+  }
+
+
+  createUser(name) {
+    console.log(this.state);
+    axios.post(SERVER_URL, {name: name}).then( results => this.setState( { users:   [results.data, ...this.state.users] })
+    )
   }
 
   fetchSelectedSeat( row, column ) {
@@ -29,6 +41,7 @@ class Reservation extends Component {
     return (
     <div>
       <h1> Reservation </h1>
+      < AddName onSubmit={ this.createUser } />
       < FlightInfo flightId={ this.props.match.params.flightId } />
       < SeatingPlan flight={ this.state.flight } onClick={ this.fetchSelectedSeat } />
       < SelectedSeat seat={ this.state.selectedSeat } flightId={ this.props.match.params.flightId } />
@@ -40,7 +53,7 @@ class Reservation extends Component {
 class FlightInfo extends Component {
   constructor( props ) {
     super( props );
-    this.state = { flight: '' };
+    this.state = { flight: '', users: [] };
 
     const flightId = props.flightId
     const fetchFlights = () => {
@@ -52,6 +65,9 @@ class FlightInfo extends Component {
   render() {
     return (
 
+      // { props.users.map(u => (
+      // <div className="username"> {u.name}</div>))} </div>
+      <div>
       <h2 className="flightdeets">
         Flight Date: { this.state.flight.date }
         <br/>
@@ -59,6 +75,7 @@ class FlightInfo extends Component {
         <br/>
         { this.state.flight.origin } > { this.state.flight.destination }
       </h2>
+      </div>
 
     )
   }
