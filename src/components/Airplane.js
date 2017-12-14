@@ -1,5 +1,6 @@
 import React, { PureComponent as Component } from 'react';
 import { Link } from 'react-router-dom';
+import Results from './Results';
 import axios from 'axios';
 import _ from 'underscore';
 
@@ -7,8 +8,8 @@ const SERVER_URL = 'http://localhost:5000/airplanes.json'
 
 class Airplane extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { airplanes: [] };
 
     this.createAirplane = this.createAirplane.bind( this );
@@ -21,18 +22,21 @@ class Airplane extends Component {
 
   createAirplane(name, rows, columns) {
     console.log(this.state);
-    axios.post(SERVER_URL, {name: name, rows: rows, columns:  columns}).then( results => this.setState( { airplanes:   [results.data, ...this.state.airplanes] })
-    )
+    axios.post(SERVER_URL, {name: name, rows: rows, columns:  columns}).then( results =>
+      {
+      this.setState({ airplanes: [results.data, ...this.state.airplanes] })
+    });
   }
 
   render() {
+
     return (
       <div>
         <h1> Burning Fleet </h1>
         < CreateAirplane onSubmit= {this.createAirplane} />
         < SeatingPlan airplanes={ this.state.airplanes } />
+        <Results airplanes={ this.state.airplanes } />
       </div>
-
     )
   }
 }
