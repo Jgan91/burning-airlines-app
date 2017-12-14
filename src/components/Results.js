@@ -22,7 +22,7 @@ function Results(props) {
           <span className="results-flight"><Link to={/flight/+f.id}>{ f.flight_num }</Link></span>
           <span className="results-from">{ f.origin } > { f.destination }</span>
           <span className="results-plane">{ f.airplane_id }</span>
-          <span className="results-seat">{ parseInt(f.airplane.rows) * parseInt(f.airplane.columns) }</span>
+          <span className="results-seat">{ parseInt(f.airplane.columns) * parseInt(f.airplane.rows) }</span>
         </div>
       )}
 
