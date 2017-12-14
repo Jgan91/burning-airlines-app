@@ -101,14 +101,17 @@ class SeatingPlan extends Component {
   }
 
   render() {
+
     return (
+
       <div>
         <h3> Seating Plan </h3>
         { this.props.airplanes.map(airplane=> (
           <div className="airplane" key={airplane.id}>
-            <span> {airplane.name} </span><span> Rows: {airplane.rows} </span><span> Columns: {airplane.columns} </span>
+             <span className ="airplaneName"> {airplane.name} </span>
+             
             <div className="plan">
-              { _( airplane.columns ).times( () => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( () => <div className ="seat"></div> ) }</div> ) }
+              { _.range( parseInt( airplane.columns )).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex) => <div className ="seat">{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</div> ) }</div> ) }
             </div>
           </div>
         ))}
