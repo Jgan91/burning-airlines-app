@@ -40,7 +40,6 @@ class Reservation extends Component {
     return (
     <div>
       <h1> Reservation </h1>
-      < AddName onSubmit={ this.createUser } />
       < FlightInfo flightId={ this.props.match.params.flightId } />
       < SeatingPlan flight={ this.state.flight } onClick={ this.fetchSelectedSeat } />
       < SelectedSeat seat={ this.state.selectedSeat } flightId={ this.props.match.params.flightId } />

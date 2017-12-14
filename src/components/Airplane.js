@@ -35,7 +35,6 @@ class Airplane extends Component {
         <h1> Burning Fleet </h1>
         < CreateAirplane onSubmit= {this.createAirplane} />
         < SeatingPlan airplanes={ this.state.airplanes } />
-        <Results airplanes={ this.state.airplanes } />
       </div>
     )
   }
@@ -109,7 +108,7 @@ class SeatingPlan extends Component {
         { this.props.airplanes.map(airplane=> (
           <div className="airplane" key={airplane.id}>
              <span className ="airplaneName"> {airplane.name} </span>
-             
+
             <div className="plan">
               { _.range( parseInt( airplane.columns )).map( ( column, columnIndex ) => <div className="row">{ _.range( parseInt( airplane.rows ) ).map( ( row, rowIndex) => <div className ="seat">{ rowIndex + 1 }{ String.fromCharCode( columnIndex + 65 ) }</div> ) }</div> ) }
             </div>
