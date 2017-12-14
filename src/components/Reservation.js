@@ -68,8 +68,6 @@ class FlightInfo extends Component {
       // <div className="username"> {u.name}</div>))} </div>
       <div>
       <h2 className="flightdeets">
-        Name:
-        <br />
         Flight Date: { this.state.flight.date }
         <br/>
         Flight Number: { this.state.flight.flight_num }

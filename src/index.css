@@ -2,7 +2,8 @@ body {
   margin: 50px;
   padding: 0;
   font-family: sans-serif;
-  background-color: indianred;
+  /*background-image: url("http://www.expresssuccess.net/wp-content/uploads/stairs-to-heaven-5.jpg");
+  background-repeat: no-repeat;*/
 }
 
 label {
@@ -20,3 +21,14 @@ label {
   color: white;
   letter-spacing: 6px;
 };
+
+.airplaneName {
+  font-style: bold;
+  color: green;
+}
+
+.airplane {
+  color: purple;
+  font-weight: bold;
+  font-size: 13px;
+}
